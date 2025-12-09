@@ -115,11 +115,44 @@ python improved_snake_ai.py
 - **Çıkış Katmanı**: 4 nöron (Yukarı, Aşağı, Sol, Sağ)
 - **Aktivasyon**: Sigmoid/ReLU
 
-### Vision Sistemi (Görme)
-Yılan 8 farklı yöne bakar ve her yön için 3 özellik algılar:
-- Yiyeceğe olan mesafe
-- Kendi vücuduna olan mesafe
-- Duvara olan mesafe
+### Vision Sistemi (Görme) - 24 Girdi
+
+**📊 Yapı: 24 = 8 Yön × 3 Özellik**
+
+**🧭 8 Bakış Yönü:**
+| No | Yön | Ok | Açıklama |
+|----|-----|----|----------|
+| 1 | Yukarı | ↑ | Düz yukarı |
+| 2 | Yukarı-Sağ | ↗ | Sağ üst çapraz |
+| 3 | Sağ | → | Düz sağ |
+| 4 | Aşağı-Sağ | ↘ | Sağ alt çapraz |
+| 5 | Aşağı | ↓ | Düz aşağı |
+| 6 | Aşağı-Sol | ↙ | Sol alt çapraz |
+| 7 | Sol | ← | Düz sol |
+| 8 | Yukarı-Sol | ↖ | Sol üst çapraz |
+
+**👁️ Her Yön İçin 3 Özellik:**
+- **🍎 Food Distance**: Bu yönde yiyeceğe olan uzaklık
+- **🐍 Body Distance**: Bu yönde kendi vücuduna olan uzaklık
+- **🧱 Wall Distance**: Bu yönde duvara olan uzaklık
+
+**📏 Mesafe Değerleri:**
+- **0.000**: Çok yakın (hemen başında)
+- **0.050**: Yakın (~20 birim)
+- **0.100**: Orta (~10 birim)
+- **1.000**: Uzak veya görünmüyor
+
+**🧮 24 Girdinin Tam Sırası:**
+| Girdi No | Yön | Food | Body | Wall |
+|----------|-----|------|------|------|
+| 1-3 | Yukarı | G1 | G2 | G3 |
+| 4-6 | Yukarı-Sağ | G4 | G5 | G6 |
+| 7-9 | Sağ | G7 | G8 | G9 |
+| 10-12 | Aşağı-Sağ | G10 | G11 | G12 |
+| 13-15 | Aşağı | G13 | G14 | G15 |
+| 16-18 | Aşağı-Sol | G16 | G17 | G18 |
+| 19-21 | Sol | G19 | G20 | G21 |
+| 22-24 | Yukarı-Sol | G22 | G23 | G24 |
 
 ### Genetik Algoritma
 - **Processing**: 2000 yılan popülasyonu
@@ -160,14 +193,40 @@ Yılan 8 farklı yöne bakar ve her yön için 3 özellik algılar:
 - **FPS**: 10 (yavaş ve kontrollü)
 
 ### 2. Single AI Control (Tek AI)
-- **Açıklama**: Eğitimli AI'ı izleme
+- **Açıklama**: Tek bir AI yılanını izleme (EĞİTİLMEMİŞ)
+- **Durum**: ❌ Eğitilmemiş - tamamen rastgele ağırlıklar
+- **Beklenen Skor**: 0-10 arası (rastgele performans)
+- **Özellik**: Hafif heuristic bias (yiyecek arama eğilimi)
 - **Kontroller**: R: reset
 - **FPS**: 20 (daha hızlı)
+- **Not**: 50+ skor görürseniz, bu şans ve iyi random ağırlıklar sayesindedir, eğitim değil!
 
 ### 3. Evolution Training (Evrim Eğitimi)
-- **Açıklama**: AI popülasyonu eğitimi
+- **Açıklama**: AI popülasyonu eğitimi (GERÇEK EĞİTİM)
+- **Durum**: ✅ Gerçek genetik algoritma eğitimi
+- **Popülasyon**: 20 yılan
+- **Eğitim Süresi**: 50+ nesil önerilen
+- **Beklenen Skor**: 50-70 (50 nesil), 70-90 (100+ nesil)
+- **Özellik**: En iyi bireyler seçilir, çaprazlanır, mutasyon uygulanır
 - **Kontroller**: T: mode değiştir, Space: daha fazla eğitim
 - **FPS**: 15 (orta hız)
+- **Amaç**: Gerçekten öğrenmiş AI geliştirmek
+
+---
+
+## ⚠️ ÖNEMLİ NOT: Eğitim Durumu
+
+### 🎯 Tek AI Mod (Seçenek 2) Hakkında
+- **Eğitilmiş DEĞİLDİR** - Tamamen rastgele ağırlıklar
+- 50+ skor görürseniz, bu **şans ve rastlantı** sonucudur
+- Heuristic bias sayesinde çok nadiren yüksek skor yapabilir
+- **Gerçek öğrenme için Evolution mod (Seçenek 3) gerekir**
+
+### 🎓 Eğitimli AI İçin
+1. **Evolution Training (Seçenek 3)** çalıştırın
+2. **50+ nesil** eğitin
+3. AI öğrenme sürecini izleyin
+4. Sonuçları Single AI modunda test edin
 
 ---
 
