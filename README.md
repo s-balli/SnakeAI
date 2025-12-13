@@ -32,7 +32,7 @@ Bu proje, yapay sinir ağları ve genetik algoritmalar kullanarak Snake oyununu 
 ### ⭐ Processing Versiyonu (Tavsiye Edilen)
 
 #### Gereksinimler
-- [Processing 3.5.4+](https://processing.org/download/)
+- [Processing](https://processing.org/download/)
 
 #### Kurulum
 1. Processing'i indirin ve kurun
